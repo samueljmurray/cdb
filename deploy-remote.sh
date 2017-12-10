@@ -10,7 +10,7 @@ MIX_ENV=prod mix phoenix.digest
 MIX_ENV=prod mix release
 mkdir ~/cdb-LIVE_new
 tar -xzf ~/cdb/_build/prod/rel/cdb/releases/0.0.1/cdb.tar.gz -C ~/cdb-LIVE_new
-rm ~/cdb/_build
+[ -e ~/cdb-LIVE/bin/cdb/_build ] && rm ~/cdb/_build
 [ -e ~/cdb-LIVE/bin/cdb ] && sudo ~/cdb-LIVE/bin/cdb stop
 rm -rf ~/cdb-LIVE
 mv ~/cdb-LIVE_new ~/cdb-LIVE
