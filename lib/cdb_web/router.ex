@@ -9,12 +9,19 @@ defmodule CdbWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :admin do
+    plug :put_layout, {CdbWeb.LayoutView, :admin}
+  end
+
+  scope "/admin", CdbWeb.Admin do
+    pipe_through :browser
+    pipe_through :admin
+
+    get "/", PageController, :index
   end
 
   scope "/", CdbWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
   end
