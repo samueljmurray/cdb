@@ -3,7 +3,6 @@
 cd ~/cdb
 git pull
 cp ~/prod.secret.exs ~/cdb/config/prod.secret.exs
-cd cdb
 mix deps.get
 cd assets && npm install && cd ..
 cd assets && ./node_modules/brunch/bin/brunch b -p && cd ..
