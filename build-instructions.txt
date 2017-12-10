@@ -1,0 +1,73 @@
+# Requirements
+# - Elixir 1.5.2
+# - Postgres 9.*
+# - Nodejs 8
+# - Git
+
+# Initial setup
+echo -e '\n## Allow ec2-user to set env when sudoing\nec2-user\tALL=(ALL)\tSETENV: ALL\nec2-user\tALL=(ALL)\tNOPASSWD: ALL' | sudo tee --append /etc/sudoers
+
+# Install Erlang + Elixir
+sudo yum install ncurses-devel openssl-devel -y
+sudo yum groupinstall "Development Tools" -y
+cd /tmp
+wget "http://erlang.org/download/otp_src_20.1.tar.gz" -O otp20.tar.gz
+tar xfz otp20.tar.gz
+cd otp_src_20.1/
+./configure
+make && sudo make install
+cd /tmp
+wget "https://github.com/elixir-lang/elixir/archive/v1.5.2.tar.gz"
+tar xfz v1.5.2.tar.gz
+cd elixir-1.5.2/
+export PATH="${PATH}:/usr/local/bin"
+for link in /usr/local/bin/*; do filename=`basename $link`; sudo ln -s $(readlink -f /usr/local/bin/$filename) /usr/bin/$filename; done
+make && sudo make install
+mix local.hex --force
+mix local.rebar --force
+
+for link in /usr/local/bin/*; do filename=`basename $link`; sudo ln -s $(readlink -f /usr/local/bin/$filename) /usr/bin/$filename; done
+
+# Install postgres
+sudo yum install postgresql96-server -y
+sudo service postgresql96 initdb
+sudo /sbin/chkconfig --levels 235 postgresql96 on
+sudo service postgresql96 start
+
+# Install Nodejs
+curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+sudo yum install nodejs -y
+
+# Install Git
+sudo yum install git -y
+
+# Use postgres and create user, db and privileges
+sudo su - postgres
+createuser cdb
+createdb cdb_prod
+psql
+ALTER USER cdb WITH ENCRYPTED PASSWORD '<password>';
+GRANT ALL PRIVILEGES ON DATABASE cdb_prod TO cdb;
+
+# Run locally
+scp ./build.sh <REMOTE>:~
+scp ./config/prod.secret.exs <REMOTE>:~
+ssh <REMOTE> ~/build.sh
+
+# Run on box (build.sh):
+mkdir build && cd build
+git clone git@github.com:samueljmurray/cdb.git
+cp ~/prod.secret.exs ~/build/cdb/config/prod.secret.exs
+cd cdb
+mix deps.get
+cd assets && npm install && cd ..
+cd assets && ./node_modules/brunch/bin/brunch b -p && cd ..
+MIX_ENV=prod mix phoenix.digest
+MIX_ENV=prod mix release
+cp ~/build/cdb/_build/prod/rel/cdb/releases/0.0.1/cdb.tar.gz ~
+cd ~ && rm -rf build
+tar -xzf ~/cdb.tar.gz
+systemctl stop cdb.service
+rm -rf ~/cdb-LIVE
+mv ~/cdb ~/cdb-LIVE
+systemctl start cdb.service
