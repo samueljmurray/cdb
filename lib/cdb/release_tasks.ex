@@ -7,9 +7,7 @@ defmodule Cdb.ReleaseTasks do
     :ecto
   ]
 
-  def myapp, do: :myapp
-
-  def repos, do: Application.get_env(myapp(), :ecto_repos, [])
+  def repos, do: Application.get_env(:cdb, :ecto_repos, [])
 
   def seed do
     # Run migrations
@@ -23,18 +21,16 @@ defmodule Cdb.ReleaseTasks do
     :init.stop()
   end
 
-  defp prepare do
-    me = myapp()
-    
-    IO.puts "Loading #{me}.."
-    # Load the code for myapp, but don't start it
-    :ok = Application.load(me)
+  defp prepare do    
+    IO.puts "Loading #{:cdb}.."
+    # Load the code for :cdb, but don't start it
+    :ok = Application.load(:cdb)
 
     IO.puts "Starting dependencies.."
     # Start apps necessary for executing migrations
     Enum.each(@start_apps, &Application.ensure_all_started/1)
 
-    # Start the Repo(s) for myapp
+    # Start the Repo(s) for :cdb
     IO.puts "Starting repos.."
     Enum.each(repos(), &(&1.start_link(pool_size: 1)))
   end
