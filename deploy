@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+hostname=$1
+
+scp ./config/prod.secret.exs ec2-user@$hostname:~
+ssh ec2-user@$hostname ~/build.sh

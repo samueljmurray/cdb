@@ -30,6 +30,7 @@ for link in /usr/local/bin/*; do filename=`basename $link`; sudo ln -s $(readlin
 
 # Install postgres
 sudo yum install postgresql96-server -y
+sudo sed -i.bak -e 's/ident$/trust/' /var/lib/pgsql96/data/pg_hba.conf
 sudo service postgresql96 initdb
 sudo /sbin/chkconfig --levels 235 postgresql96 on
 sudo service postgresql96 start
@@ -48,26 +49,36 @@ createdb cdb_prod
 psql
 ALTER USER cdb WITH ENCRYPTED PASSWORD '<password>';
 GRANT ALL PRIVILEGES ON DATABASE cdb_prod TO cdb;
+\q
+exit
+
+# Clone repo
+git clone git@github.com:samueljmurray/cdb.git
+
+
+
+
+
 
 # Run locally
-scp ./build.sh <REMOTE>:~
 scp ./config/prod.secret.exs <REMOTE>:~
 ssh <REMOTE> ~/build.sh
 
 # Run on box (build.sh):
-mkdir build && cd build
-git clone git@github.com:samueljmurray/cdb.git
-cp ~/prod.secret.exs ~/build/cdb/config/prod.secret.exs
+cd ~/cdb
+git pull
+cp ~/prod.secret.exs ~/cdb/config/prod.secret.exs
 cd cdb
 mix deps.get
 cd assets && npm install && cd ..
 cd assets && ./node_modules/brunch/bin/brunch b -p && cd ..
 MIX_ENV=prod mix phoenix.digest
 MIX_ENV=prod mix release
-cp ~/build/cdb/_build/prod/rel/cdb/releases/0.0.1/cdb.tar.gz ~
-cd ~ && rm -rf build
-tar -xzf ~/cdb.tar.gz
-systemctl stop cdb.service
+mkdir ~/cdb-LIVE_new
+tar -xzf ~/cdb/_build/prod/rel/cdb/releases/0.0.1/cdb.tar.gz -C ~/cdb-LIVE_new
+rm ~/cdb/_build
+[ -e ~/cdb-LIVE/bin/cdb ] && sudo ~/cdb-LIVE/bin/cdb stop
 rm -rf ~/cdb-LIVE
-mv ~/cdb ~/cdb-LIVE
-systemctl start cdb.service
+mv ~/cdb-LIVE_new ~/cdb-LIVE
+~/cdb-LIVE/bin/cdb migrate
+sudo PORT=80 ~/cdb-LIVE/bin/cdb start
