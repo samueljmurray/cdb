@@ -1,3 +1,3 @@
-defmodule CdbWeb.Admin.LayoutView do
-  use CdbWeb, :view
+defmodule CDBWeb.Admin.LayoutView do
+  use CDBWeb, :view
 end

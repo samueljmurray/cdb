@@ -1,3 +1,3 @@
-defmodule CdbWeb.PageViewTest do
-  use CdbWeb.ConnCase, async: true
+defmodule CDBWeb.PageViewTest do
+  use CDBWeb.ConnCase, async: true
 end

@@ -42,6 +42,9 @@ sudo yum install nodejs -y
 # Install Git
 sudo yum install git -y
 
+# Install Imagemagick
+sudo yum install ImageMagick -y
+
 # Use postgres and create user, db and privileges
 sudo su - postgres
 createuser cdb

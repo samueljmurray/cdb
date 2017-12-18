@@ -1,0 +1,30 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Something went wrong. Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :title, class: "control-label" %>
+    <%= error_tag f, :title %>
+    <%= text_input f, :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :body, class: "control-label" %>
+    <%= error_tag f, :body %>
+    <%= textarea f, :body, class: "form-control sir-trevor" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :published, class: "control-label" %>
+    <%= error_tag f, :published %>
+    <%= checkbox f, :published, value: f.data.published_at !== nil %>
+  </div>
+
+  <div class="form-group text-center">
+    <%= link "Cancel", to: admin_collection_path(@conn, :index), class: "btn btn-default btn-lg" %>
+    <%= submit "Submit", class: "btn btn-primary btn-lg" %>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
-defmodule CdbWeb.PageControllerTest do
-  use CdbWeb.ConnCase
+defmodule CDBWeb.PageControllerTest do
+  use CDBWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

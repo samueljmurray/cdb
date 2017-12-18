@@ -1,4 +1,4 @@
-defmodule Cdb.Mixfile do
+defmodule CDB.Mixfile do
   use Mix.Project
 
   def project do
@@ -19,7 +19,7 @@ defmodule Cdb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Cdb.Application, []},
+      mod: {CDB.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -42,7 +42,15 @@ defmodule Cdb.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.5", runtime: false},
-      {:basic_auth, "~> 2.2.2"}
+      {:basic_auth, "~> 2.2.2"},
+      {:html_sanitize_ex, "~> 1.3.0"},
+      {:html_entities, "~> 0.4.0"},
+      {:timex, "~> 3.1"},
+      {:arc, "~> 0.8.0"},
+      {:arc_ecto, "~> 0.7.0"},
+      {:ex_aws, "~> 1.1"},
+      {:sweet_xml, "~> 0.6"},
+      {:uuid, "~> 1.1.8"}
     ]
   end
 

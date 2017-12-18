@@ -5,6 +5,11 @@ exports.config = {
       joinTo: {
         'js/app.js': 'js/app/**/*.js',
         'js/admin.js': 'js/admin/**/*.js'
+      },
+      order: {
+        before: [
+          'js/admin/vendor/*.js'
+        ]
       }
     },
     stylesheets: {
@@ -14,17 +19,8 @@ exports.config = {
       },
       order: {
         before: [
-          "css/admin/phoenix.css"
-        ]
-      }
-    },
-    templates: {
-      joinTo: {
-        'js/app.js': [
-          'js/app/**/*.js'
-        ],
-        'js/admin.js': [
-          'js/admin/**/*.js'
+          'css/admin/vendor/*.css',
+          'css/admin/phoenix.css'
         ]
       }
     }
@@ -55,7 +51,8 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["js/app"]
+      "js/app.js": ["js/app/app"],
+      "js/admin.js": ["js/admin/admin"]
     }
   },
 

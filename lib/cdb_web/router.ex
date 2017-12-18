@@ -1,5 +1,5 @@
-defmodule CdbWeb.Router do
-  use CdbWeb, :router
+defmodule CDBWeb.Router do
+  use CDBWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,24 +11,26 @@ defmodule CdbWeb.Router do
 
   pipeline :admin do
     plug BasicAuth, use_config: {:cdb, :credentials}
-    plug :put_layout, {CdbWeb.LayoutView, :admin}
+    plug :put_layout, {CDBWeb.LayoutView, :admin}
   end
 
-  scope "/admin", CdbWeb.Admin do
+  scope "/admin", CDBWeb.Admin, as: :admin do
     pipe_through :browser
     pipe_through :admin
 
-    get "/", PageController, :index
+    get "/", CollectionController, :index
+    resources "/collections", CollectionController
+    post "/images", SirTrevorImageController, :create
   end
 
-  scope "/", CdbWeb do
+  scope "/", CDBWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CdbWeb do
+  # scope "/api", CDBWeb do
   #   pipe_through :api
   # end
 end

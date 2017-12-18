@@ -1,4 +1,4 @@
-defmodule Cdb.Application do
+defmodule CDB.Application do
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -9,23 +9,23 @@ defmodule Cdb.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Cdb.Repo, []),
+      supervisor(CDB.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(CdbWeb.Endpoint, []),
-      # Start your own worker by calling: Cdb.Worker.start_link(arg1, arg2, arg3)
-      # worker(Cdb.Worker, [arg1, arg2, arg3]),
+      supervisor(CDBWeb.Endpoint, []),
+      # Start your own worker by calling: CDB.Worker.start_link(arg1, arg2, arg3)
+      # worker(CDB.Worker, [arg1, arg2, arg3]),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Cdb.Supervisor]
+    opts = [strategy: :one_for_one, name: CDB.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    CdbWeb.Endpoint.config_change(changed, removed)
+    CDBWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -1,4 +1,4 @@
-defmodule CdbWeb.Endpoint do
+defmodule CDBWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :cdb
 
   # Serve at "/" the static files from "priv/static" directory.
@@ -36,7 +36,7 @@ defmodule CdbWeb.Endpoint do
     key: "_cdb_key",
     signing_salt: "E9dH0a1i"
 
-  plug CdbWeb.Router
+  plug CDBWeb.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

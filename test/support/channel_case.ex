@@ -1,4 +1,4 @@
-defmodule CdbWeb.ChannelCase do
+defmodule CDBWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule CdbWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint CdbWeb.Endpoint
+      @endpoint CDBWeb.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Cdb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CDB.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Cdb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(CDB.Repo, {:shared, self()})
     end
     :ok
   end

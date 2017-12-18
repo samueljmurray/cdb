@@ -1,4 +1,4 @@
-defmodule Cdb.DataCase do
+defmodule CDB.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Cdb.DataCase do
 
   using do
     quote do
-      alias Cdb.Repo
+      alias CDB.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Cdb.DataCase
+      import CDB.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Cdb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CDB.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Cdb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(CDB.Repo, {:shared, self()})
     end
 
     :ok

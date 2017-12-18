@@ -1,4 +1,4 @@
-defmodule Cdb.ReleaseTasks do
+defmodule CDB.ReleaseTasks do
 
   @start_apps [
     :crypto,

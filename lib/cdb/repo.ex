@@ -1,4 +1,4 @@
-defmodule Cdb.Repo do
+defmodule CDB.Repo do
   use Ecto.Repo, otp_app: :cdb
 
   @doc """

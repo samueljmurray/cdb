@@ -1,3 +1,3 @@
-defmodule CdbWeb.PageView do
-  use CdbWeb, :view
+defmodule CDBWeb.PageView do
+  use CDBWeb, :view
 end

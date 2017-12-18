@@ -1,4 +1,4 @@
-defmodule CdbWeb.ConnCase do
+defmodule CDBWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule CdbWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import CdbWeb.Router.Helpers
+      import CDBWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint CdbWeb.Endpoint
+      @endpoint CDBWeb.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Cdb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CDB.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Cdb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(CDB.Repo, {:shared, self()})
     end
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

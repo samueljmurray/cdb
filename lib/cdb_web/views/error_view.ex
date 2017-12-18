@@ -1,5 +1,5 @@
-defmodule CdbWeb.ErrorView do
-  use CdbWeb, :view
+defmodule CDBWeb.ErrorView do
+  use CDBWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

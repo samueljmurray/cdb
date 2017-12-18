@@ -1,0 +1,27 @@
+<div class="pull-right">
+  <%= link "Add new collection", to: admin_collection_path(@conn, :new), class: "btn btn-primary" %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Published</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for collection <- @collections do %>
+    <tr>
+      <td><%= collection.title %></td>
+      <td><%= if collection.published_at, do: format_datetime(collection.published_at), else: "No" %></td>
+
+      <td class="text-right">
+        <span><%= link "Edit", to: admin_collection_path(@conn, :edit, collection), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: admin_collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-warning btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-defmodule CdbWeb.ErrorHelpers do
+defmodule CDBWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -10,7 +10,7 @@ defmodule CdbWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn (error) ->
-      content_tag :span, translate_error(error), class: "help-block"
+      content_tag :span, translate_error(error), class: "form-field-error"
     end)
   end
 
@@ -32,9 +32,9 @@ defmodule CdbWeb.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(CdbWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(CDBWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(CdbWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(CDBWeb.Gettext, "errors", msg, opts)
     end
   end
 end
