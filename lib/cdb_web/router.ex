@@ -10,6 +10,7 @@ defmodule CdbWeb.Router do
   end
 
   pipeline :admin do
+    plug BasicAuth, use_config: {:cdb, :credentials}
     plug :put_layout, {CdbWeb.LayoutView, :admin}
   end
 

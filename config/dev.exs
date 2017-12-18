@@ -56,3 +56,7 @@ config :cdb, Cdb.Repo,
   database: "cdb_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :cdb, :credentials,
+  username: "u",
+  password: "p"
