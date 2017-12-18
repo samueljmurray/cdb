@@ -2,6 +2,7 @@
 
 cd ~/cdb
 git pull
+cp ~/dev.secret.exs ~/cdb/config/dev.secret.exs
 cp ~/prod.secret.exs ~/cdb/config/prod.secret.exs
 mix deps.get
 cd assets && npm install && cd ..
