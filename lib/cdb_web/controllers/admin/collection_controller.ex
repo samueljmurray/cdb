@@ -49,7 +49,7 @@ defmodule CDBWeb.Admin.CollectionController do
         conn
         |> put_flash(:info, "Collection deleted successfully.")
         |> redirect(to: admin_collection_path(conn, :index))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, _changeset} ->
         conn
         |> put_flash(:error, "Failed to delete collection")
         |> redirect(to: admin_collection_path(conn, :index))

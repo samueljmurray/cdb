@@ -5,7 +5,7 @@ defmodule CDB.Repo.Migrations.CreateSirTrevorImages do
     create table(:sir_trevor_images) do
       add :image, :string, null: false
 
-      timestamps
+      timestamps()
     end
   end
 end
