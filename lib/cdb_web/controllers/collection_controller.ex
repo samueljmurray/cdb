@@ -3,6 +3,7 @@ defmodule CDBWeb.CollectionController do
   alias CDB.Collections
 
   plug :assign_collections
+  plug :assign_current_path
 
   def home(conn, _params) do
     collection = Collections.get_latest_published_collection!()
@@ -16,8 +17,12 @@ defmodule CDBWeb.CollectionController do
     render(conn, "show.html", collection: collection, collection_body: collection_body)
   end
 
-  def assign_collections(conn, _params) do
+  defp assign_collections(conn, _params) do
     collections = Collections.list_published_collections()
     assign(conn, :collections, collections)
+  end
+
+  defp assign_current_path(conn, _params) do
+    assign(conn, :current_path, current_path(conn))
   end
 end

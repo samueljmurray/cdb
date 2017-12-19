@@ -1,1 +1,194 @@
-/* This file is for your main application css. */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300|Roboto:300,300i,400,500');
+
+body {
+  margin: 0 4vw;
+  color: #232323;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+h2 {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #98989b;
+  text-decoration: underline;
+}
+
+a, a:visited, a:active, a:hover {
+  color: #232323;
+  text-decoration: none;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: white;
+  height: 100%;
+  width: 92vw;
+  padding: 0 4vw;
+}
+.nav-container.active {
+  display: block;
+}
+@media (min-width: 719px) {
+  .nav-container {
+    position: static;
+    display: block;
+    width: 26vw;
+    padding: 0;
+    flex: 1;
+    margin-right: 2vw;
+    margin-top: 3vh;
+  }
+}
+
+.page-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 2vw;
+}
+@media (min-width: 719px) {
+  .page-main {
+    flex-direction: row;
+  }
+}
+
+.header {
+  margin-top: 2vw;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (min-width: 719px) {
+  .header {
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+}
+
+.menu-toggle img {
+  height: 30px;
+  width: 30px;
+}
+@media (min-width: 719px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.menu-toggle-close {
+  text-align: right;
+  margin-top: 1.05rem;
+}
+
+.collection-nav {
+  margin-bottom: 6rem;
+}
+
+.collection-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: -0.5px;
+}
+
+.collection-nav-list-item {
+  margin-bottom: 1rem;
+}
+
+.collection-nav-list-item.active a {
+  text-decoration: underline;
+}
+
+.collection {
+  flex: 1;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+@media (min-width: 719px) {
+  .collection {
+    width: 64vw;
+  }
+}
+
+.collection-title {
+  display: block;
+}
+@media (min-width: 719px) {
+  .collection-title {
+    display: none;
+  }
+}
+
+.collection-image {
+  max-width: 100%;
+  max-height: 100vh;
+  margin-bottom: 2rem;
+}
+
+.collection-video {
+  width: 92vw;
+  height: calc(92vw*0.5625);
+  margin-bottom: 2rem;
+}
+@media (min-width: 719px) {
+  .collection-video {
+    width: 64vw;
+    height: calc(64vw*0.5625);
+  }
+}
+
+.collection-text {
+  text-align: left;
+  font-weight: 300;
+}
+
+.social-nav {
+  margin-bottom: 2rem;
+}
+
+.social-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.social-nav-list-item {
+  padding-right: 1rem;
+}
+
+.social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.2;
+}

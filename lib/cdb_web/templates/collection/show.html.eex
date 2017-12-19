@@ -1,14 +1,48 @@
-<nav>
-  <ul>
-    <%= for collection <- @collections do %>
-      <li>
-        <%= link collection.title, to: collection_path(@conn, :show, collection.slug) %>
-      </li>
-    <% end %>
-  </ul>
-</nav>
-<article>
-  <h2><%= @collection.title %></h2>
+<div class="nav">
+  <header class="header">
+    <h1>Carlo Di Blasi</h1>
+    <div class="menu-toggle" id="menu-toggle-open">
+      <%= img_tag "/images/menu.svg" %>
+    </div>
+  </header>
+  <div class="nav-container" id="nav-container">
+    <div class="menu-toggle menu-toggle-close" id="menu-toggle-close">
+      <%= img_tag "/images/cross.svg" %>
+    </div>
+    <nav role="collection" class="collection-nav">
+      <ul class="collection-nav-list">
+        <%= for collection <- @collections do %>
+          <li class="collection-nav-list-item<%=if collection_path(@conn, :show, collection.slug) == @current_path, do: " active"%>">
+            <%= link collection.title, to: collection_path(@conn, :show, collection.slug) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    <nav role="social" class="social-nav">
+      <ul class="social-nav-list">
+        <li class="social-nav-list-item">
+          <%= link to: "https://instagram.com/carlodiblasi/" do %>
+            <%= img_tag "/images/instagram.svg", class: "social-icon" %>
+          <% end %>
+        </li>
+        <li class="social-nav-list-item">
+          <%= link to: "https://vimeo.com/carlodiblasi" do %>
+            <%= img_tag "/images/vimeo.svg", class: "social-icon" %>
+          <% end %>
+        </li>
+        <li class="social-nav-list-item">
+          <%= link to: "mailto:info@carlodiblasi.com" do %>
+            <%= img_tag "/images/email.svg", class: "social-icon" %>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<article class="collection">
+  <h2 class="collection-title">
+    <%= @collection.title %>
+  </h2>
   <%= for block <- @collection_body["data"] do %>
     <div>
       <%= render_sir_trevor_block(block) %>

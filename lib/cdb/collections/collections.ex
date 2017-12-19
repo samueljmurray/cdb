@@ -22,7 +22,7 @@ defmodule CDB.Collections do
   def get_latest_published_collection!() do
     Collection
     |> Collection.query_published()
-    |> first(:published_at)
+    |> first(desc: :published_at)
     |> Repo.one!()
   end
   

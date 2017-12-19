@@ -31,8 +31,8 @@ defmodule CDB.Collections.Collection do
   def query_order_unpublished_published(query) do
     from c in query,
       order_by: [desc: is_nil(c.published_at)],
-      order_by: [desc: c.updated_at],
-      order_by: [desc: c.published_at]
+      order_by: [desc: c.published_at],
+      order_by: [desc: c.updated_at]
   end
 
   def put_published_at(%Ecto.Changeset{changes: %{published: true}} = changeset, %__MODULE__{published_at: nil}) do
