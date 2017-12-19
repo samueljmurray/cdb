@@ -29,6 +29,7 @@ defmodule CDB.Collections do
   def list_published_collections() do
     Collection
     |> Collection.query_published()
+    |> Collection.query_order_published()
     |> Repo.all()
   end
 

@@ -28,6 +28,11 @@ defmodule CDB.Collections.Collection do
       where: not is_nil(c.published_at)
   end
 
+  def query_order_published(query) do
+    from c in query,
+      order_by: [desc: c.published_at]
+  end
+
   def query_order_unpublished_published(query) do
     from c in query,
       order_by: [desc: is_nil(c.published_at)],
