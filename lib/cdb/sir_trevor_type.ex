@@ -19,6 +19,7 @@ defmodule CDB.SirTrevorType do
   def cast(_), do: :error
 
   def load(string) when is_binary(string), do: {:ok, string}
+  def load(_), do: :error
 
   def dump(string) when is_binary(string), do: {:ok, string}
   def dump(_), do: :error

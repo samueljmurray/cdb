@@ -26,7 +26,8 @@ defmodule CDBWeb.Router do
   scope "/", CDBWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", CollectionController, :home
+    get "/collection/:slug", CollectionController, :show
   end
 
   # Other scopes may use custom stacks.
