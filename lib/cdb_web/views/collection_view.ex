@@ -5,7 +5,7 @@ defmodule CDBWeb.CollectionView do
     url = "https://player.vimeo.com/video/" <> remote_id
     content_tag :iframe, [], class: "collection-video", src: url, width: "640", height: "360", frameborder: "0", webkitallowfullscreen: true, mozallowfullscreen: true, allowfullscreen: true
   end
-  def render_sir_trevor_block(%{"type" => "image", "data" => %{"file" => %{"image" => %{"web" => url}}}} = block) do
+  def render_sir_trevor_block(%{"type" => "image", "data" => %{"file" => %{"image" => %{"web" => url}}}}) do
     img_tag url, class: "collection-image"
   end
   def render_sir_trevor_block(%{"type" => "text", "data" => %{"text" => html}}) do
