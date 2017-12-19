@@ -50,7 +50,8 @@ defmodule CDB.Mixfile do
       {:arc_ecto, "~> 0.7.0"},
       {:ex_aws, "~> 1.1"},
       {:sweet_xml, "~> 0.6"},
-      {:uuid, "~> 1.1.8"}
+      {:uuid, "~> 1.1.8"},
+      {:ecto_autoslug_field, "~> 0.4"}
     ]
   end
 

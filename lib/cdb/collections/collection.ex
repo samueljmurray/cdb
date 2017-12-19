@@ -2,12 +2,14 @@ defmodule CDB.Collections.Collection do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, warn: false
+  alias CDB.Collections.Collection.TitleSlug
 
   schema "collections" do
     field :title, :string
     field :body, CDB.SirTrevorType
     field :published_at, :utc_datetime
     field :published, :boolean, virtual: true
+    field :slug, TitleSlug.Type
 
     timestamps()
   end
@@ -17,6 +19,8 @@ defmodule CDB.Collections.Collection do
     |> cast(attrs, [:title, :body, :published])
     |> validate_required([:title, :body])
     |> put_published_at(collection)
+    |> TitleSlug.maybe_generate_slug()
+    |> TitleSlug.unique_constraint()
   end
 
   def query_published(query) do
