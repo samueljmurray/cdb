@@ -11,8 +11,8 @@
     </div>
     <nav role="collection" class="collection-nav">
       <ul class="collection-nav-list">
-        <%= for collection <- @collections do %>
-          <li class="collection-nav-list-item<%=if collection_path(@conn, :show, collection.slug) == @current_path, do: " active"%>">
+        <%= for {collection, i} <- Enum.with_index(@collections) do %>
+          <li class="collection-nav-list-item<%=if collection_path(@conn, :show, collection.slug) == @current_path || (i == 0 && @current_path == "/"), do: " active"%>">
             <%= link collection.title, to: collection_path(@conn, :show, collection.slug) %>
           </li>
         <% end %>
