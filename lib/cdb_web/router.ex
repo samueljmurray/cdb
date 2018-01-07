@@ -7,7 +7,7 @@ defmodule CDBWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug BasicAuth, use_config: {:cdb, :credentials}
+    #plug BasicAuth, use_config: {:cdb, :credentials}
   end
 
   pipeline :admin do
