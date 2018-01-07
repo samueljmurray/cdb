@@ -6,7 +6,7 @@ defmodule CDB.Collections.Collection do
 
   schema "collections" do
     field :title, :string
-    field :body, CDB.SirTrevorType
+    field :body, :string
     field :published_at, :utc_datetime
     field :published, :boolean, virtual: true
     field :slug, TitleSlug.Type

@@ -1,12 +1,14 @@
 <div class="pull-right">
   <%= link "Add new collection", to: admin_collection_path(@conn, :new), class: "btn btn-primary" %>
+  <hr>
 </div>
+
 
 <table class="table">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Published</th>
+      <th>State</th>
 
       <th></th>
     </tr>
@@ -17,7 +19,7 @@
         <td><%= link collection.title, to: collection_path(@conn, :show, collection.slug) %></td>
         <td>
           <%= if collection.published_at do %>
-            <span class="label label-success">Published at <%= format_datetime(collection.published_at) %></span>
+            <span class="label label-success">Published</span>
           <% else %>
             <span class="label label-default">Unpublished</span>
           <% end %>
